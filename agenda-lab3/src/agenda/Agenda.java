@@ -10,22 +10,26 @@ public class Agenda {
 	
 	private static final int TAMANHO_AGENDA = 100;
 	
-	private String[] contatos; //apenas uma simplificacao de contato
+	private Contato[] contatos; //apenas uma simplificacao de contato
 
 	/**
 	 * Cria uma agenda.
 	 */
 	public Agenda() {
-		this.contatos = new String[TAMANHO_AGENDA];
+		this.contatos = new Contato[TAMANHO_AGENDA];
 	}
 	
 	/**
 	 * Acessa a lista de contatos mantida.
+	 *
 	 * @return O array de contatos.
 	 */
+
+	/**
 	public String[] getContatos() {
 		return this.contatos.clone();
 	}
+	 /*
 
 	/**
 	 * Acessa os dados de um contato específico.
@@ -33,7 +37,8 @@ public class Agenda {
 	 * @return Dados do contato. Null se não há contato na posição.
 	 */
 	public String getContato(int posicao) {
-		return contatos[posicao];
+		String contatoInfo = contatos[posicao].getContato();
+		return contatoInfo;
 	}
 
 	/**
@@ -44,6 +49,17 @@ public class Agenda {
 	 * @param telefone Telefone do contato.
 	 */
 	public void cadastraContato(int posicao, String nome, String sobrenome, String telefone) {
-		this.contatos[posicao] = nome;
+		this.contatos[posicao] = new Contato(nome, sobrenome, telefone);
+	}
+
+	public boolean verificaNomeContato(String nome) {
+		for (int i = 0; i < contatos.length; i++) {
+			if (contatos[i] != null) {
+				if (contatos[i].getNome() == nome){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
