@@ -62,4 +62,15 @@ public class Agenda {
 		}
 		return false;
 	}
+
+	public String getListaContatos() {
+		StringBuilder listagemNomes = new StringBuilder();
+		for (int i = 0; i < contatos.length; i++) {
+			if (contatos[i] != null) {
+				listagemNomes.append(String.format("%s - %s\n", i, contatos[i].getNome()));
+			}
+		}
+		return listagemNomes.toString();
+	}
+
 }

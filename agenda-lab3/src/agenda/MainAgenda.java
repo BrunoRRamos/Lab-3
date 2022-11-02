@@ -67,9 +67,7 @@ public class MainAgenda {
 				cadastraContato(agenda, scanner);
 				break;
 			case "L":
-				/**
-				 *listaContatos();
-				 */
+				 listaContatos(agenda);
 				break;
 			case "E":
 				exibeContato(agenda, scanner);
@@ -84,23 +82,14 @@ public class MainAgenda {
 
 	/**
 	 * Imprime lista de contatos da agenda.
-	 *
-	 * @param agenda A agenda sendo manipulada.
 	 */
 
-	/**
-	 * private static void listaContatos(Agenda agenda) {
-	 * System.out.println("\nLista de contatos: ");
-	 * String[] contatos = agenda.getContatos();
-	 * for (int i = 0; i < contatos.length; i++) {
-	 * if (contatos[i] != null) {
-	 * System.out.println(formataContato(i, contatos[i]));
-	 * }
-	 * }
-	 * }
-	 * /**
-	 * <p>
-	 * /**
+	private static void listaContatos(Agenda agenda) {
+		System.out.println("\nLista de contatos: ");
+		System.out.print(agenda.getListaContatos());
+	}
+
+	  /**
 	 * Imprime os detalhes de um dos contatos da agenda.
 	 *
 	 * @param agenda  A agenda.
@@ -137,7 +126,7 @@ public class MainAgenda {
 	 */
 	private static void cadastraContato(Agenda agenda, Scanner scanner) {
 		System.out.print("\nPosição na agenda> ");
-		int posicao = scanner.nextInt();
+		int posicao = scanner.nextInt() - 1;
 		if (verificaPosicao(posicao)) {
 			System.out.println("POSIÇÃO INVÁLIDA");
 			return;
