@@ -52,14 +52,14 @@ public class Agenda {
 		this.contatos[posicao] = new Contato(nome, sobrenome, telefone);
 	}
 
-	public boolean verificaNomeContato(String nome) {
+	public boolean verificaNomeContato(String nome, String sobrenome) {
 		for (int i = 0; i < contatos.length; i++) {
 			if (contatos[i] != null) {
-				if (contatos[i].getNome() == nome){
-					return false;
+				if (contatos[i].getNome().equals(nome) && contatos[i].getSobrenome().equals(sobrenome)){
+					return true;
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 }

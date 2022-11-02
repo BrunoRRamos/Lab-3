@@ -107,10 +107,15 @@ public class MainAgenda {
 	 * @param scanner Scanner para capturar qual contato.
 	 */
 	private static void exibeContato(Agenda agenda, Scanner scanner) {
-		System.out.print("\nQual contato> ");
-		int posicao = scanner.nextInt();
-		String contato = agenda.getContato(posicao);
-		System.out.println("Dados do contato:\n" + contato);
+		try {
+			System.out.print("\nQual contato> ");
+			int posicao = scanner.nextInt();
+			String contato = agenda.getContato(posicao);
+			System.out.println("Dados do contato:\n" + contato);
+		} catch (NullPointerException e) {
+			System.out.println("POSIÇÃO INVÁLIDA!");
+			return;
+		}
 	}
 
 	/**
@@ -131,35 +136,36 @@ public class MainAgenda {
 	 * @param scanner Scanner para pedir informações do contato.
 	 */
 	private static void cadastraContato(Agenda agenda, Scanner scanner) {
-		int posicao;
-		while (true) {
-			System.out.print("\nPosição na agenda> ");
-			int posicaoEntrada = scanner.nextInt();
-			if (verificaPosicao(posicaoEntrada)) {
-				posicao = posicaoEntrada;
-				break;
-			} else {
-				System.out.println("POSIÇÃO INVÁLIDA");
-			}
+		System.out.print("\nPosição na agenda> ");
+		int posicao = scanner.nextInt();
+		if (verificaPosicao(posicao)) {
+			System.out.println("POSIÇÃO INVÁLIDA");
+			return;
 		}
 
-		String nome;
-		while (true) {
-			System.out.print("\nNome> ");
-			String nomeEntrada = scanner.next();
-			if (agenda.verificaNomeContato(nomeEntrada)){
-				nome = nomeEntrada;
-				break;
-			} else {
-				System.out.println("CONTATO JA CADASTRADO");
-			}
-		}
-
+		System.out.print("\nNome> ");
+		String nome = scanner.next();
 		scanner.nextLine();
 		System.out.print("\nSobrenome> ");
 		String sobrenome = scanner.nextLine();
+
+		if (isNullNome(nome, sobrenome)) {
+			System.out.println("CONTATO INVALIDO");
+			return;
+		}
+
+		if (agenda.verificaNomeContato(nome, sobrenome)) {
+			System.out.println("CONTATO JA CADASTRADO");
+			return;
+		}
+
 		System.out.print("\nTelefone> ");
 		String telefone = scanner.nextLine();
+
+		if (telefone == null) {
+			System.out.println("CONTATO INVALIDO");
+			return;
+		}
 		agenda.cadastraContato(posicao, nome, sobrenome, telefone);
 	}
 
@@ -188,7 +194,12 @@ public class MainAgenda {
 	private static boolean verificaPosicao(int posicao) {
 		boolean maiorQue100 = posicao > 100;
 		boolean menorQueZero = posicao < 0;
-		return !(menorQueZero || maiorQue100);
+		return menorQueZero || maiorQue100;
 	}
-
+	private static boolean isNullNome(String nome, String sobrenome) {
+		if (nome == null || sobrenome == null) {
+			return true;
+		}
+		return false;
+	}
 }
