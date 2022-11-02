@@ -17,9 +17,15 @@ public class Contato {
         this.favorito = true;
     }
 
+    public void desfavoritaContato() {
+        this.favorito = false;
+    }
+
     public String getContato() {
-        String contato = this.nome + " " + this.sobrenome + "\n" + this.telefone;
-        return contato;
+        if (this.favorito == true) {
+            return "❤ " + this.nome + " " + this.sobrenome + "\n" + this.telefone;
+        }
+        return this.nome + " " + this.sobrenome + "\n" + this.telefone;
     }
 
     public String getNome() {

@@ -48,6 +48,9 @@ public class MainAgenda {
 						"(C)adastrar Contato\n" +
 						"(L)istar Contatos\n" +
 						"(E)xibir Contato\n" +
+						"(F)avoritos\n" +
+						"(A)dicionar Favorito\n" +
+						"(R)emover Favorito\n" +
 						"(S)air\n" +
 						"\n" +
 						"Opção> ");
@@ -72,6 +75,15 @@ public class MainAgenda {
 			case "E":
 				exibeContato(agenda, scanner);
 				break;
+			case "F":
+				listaFavoritos(agenda);
+				break;
+			case "A":
+				favoritaContato(agenda, scanner);
+				break;
+			case "R":
+
+				break;
 			case "S":
 				sai();
 				break;
@@ -83,7 +95,6 @@ public class MainAgenda {
 	/**
 	 * Imprime lista de contatos da agenda.
 	 */
-
 	private static void listaContatos(Agenda agenda) {
 		System.out.println("\nLista de contatos: ");
 		System.out.print(agenda.getListaContatos());
@@ -98,12 +109,11 @@ public class MainAgenda {
 	private static void exibeContato(Agenda agenda, Scanner scanner) {
 		try {
 			System.out.print("\nQual contato> ");
-			int posicao = scanner.nextInt();
+			int posicao = scanner.nextInt() - 1;
 			String contato = agenda.getContato(posicao);
 			System.out.println("Dados do contato:\n" + contato);
 		} catch (NullPointerException e) {
 			System.out.println("POSIÇÃO INVÁLIDA!");
-			return;
 		}
 	}
 
@@ -185,10 +195,43 @@ public class MainAgenda {
 		boolean menorQueZero = posicao < 0;
 		return menorQueZero || maiorQue100;
 	}
+
+	private static boolean verificaPosicaoFav(int posicao) {
+		boolean maiorQue10 = posicao > 10;
+		boolean menorQueZero = posicao < 0;
+		return menorQueZero || maiorQue10;
+	}
+
 	private static boolean isNullNome(String nome, String sobrenome) {
 		if (nome == null || sobrenome == null) {
 			return true;
 		}
 		return false;
+	}
+
+	private static void favoritaContato(Agenda agenda, Scanner scanner) {
+		try {
+			System.out.print("\nContato> ");
+			int contatoPosi = scanner.nextInt() - 1;
+			System.out.print("\nPosicao> ");
+			int favoritoPosi = scanner.nextInt() - 1;
+
+			if (verificaPosicao(contatoPosi) || verificaPosicaoFav(favoritoPosi)) {
+				System.out.println("POSICAO INVALIDA");
+				return;
+			}
+			agenda.cadastraFavorito(contatoPosi, favoritoPosi);
+			System.out.println("CONTATO FAVORITADO NA POSIÇÃO " + (contatoPosi + 1) + "!");
+		} catch (NullPointerException e) {
+			System.out.println("POSICAO INVALIDA");
+		}
+	}
+
+	private static void listaFavoritos(Agenda agenda) {
+		try {
+			System.out.print(agenda.getFavoritos());
+		}catch (NullPointerException e) {
+			System.out.println("NENHUM FAVORITO");
+		}
 	}
 }

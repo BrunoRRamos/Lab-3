@@ -9,14 +9,17 @@ package agenda;
 public class Agenda {
 	
 	private static final int TAMANHO_AGENDA = 100;
+	private static final int TAMANHO_FAVORITOS = 10;
 	
 	private Contato[] contatos; //apenas uma simplificacao de contato
+	private Contato[] favoritos;
 
 	/**
 	 * Cria uma agenda.
 	 */
 	public Agenda() {
 		this.contatos = new Contato[TAMANHO_AGENDA];
+		this.favoritos = new Contato[TAMANHO_FAVORITOS];
 	}
 	
 	/**
@@ -52,6 +55,11 @@ public class Agenda {
 		this.contatos[posicao] = new Contato(nome, sobrenome, telefone);
 	}
 
+	public void cadastraFavorito(int contatoPosi, int favoritoPosi) {
+		contatos[contatoPosi].favoritaContato();
+		favoritos[favoritoPosi] = contatos[contatoPosi];
+	}
+
 	public boolean verificaNomeContato(String nome, String sobrenome) {
 		for (int i = 0; i < contatos.length; i++) {
 			if (contatos[i] != null) {
@@ -67,10 +75,20 @@ public class Agenda {
 		StringBuilder listagemNomes = new StringBuilder();
 		for (int i = 0; i < contatos.length; i++) {
 			if (contatos[i] != null) {
-				listagemNomes.append(String.format("%s - %s\n", i, contatos[i].getNome()));
+				listagemNomes.append(String.format("%s - %s\n", i + 1, contatos[i].getNome()));
 			}
 		}
 		return listagemNomes.toString();
+	}
+
+	public String getFavoritos() {
+		StringBuilder listagemFav = new StringBuilder();
+		for (int i = 0; i < favoritos.length; i++) {
+			if (contatos[i] != null) {
+				listagemFav.append(String.format("%s - %s\n", i + 1, favoritos[i].getNome()));
+			}
+		}
+		return listagemFav.toString();
 	}
 
 }
