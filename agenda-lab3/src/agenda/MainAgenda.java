@@ -82,7 +82,7 @@ public class MainAgenda {
 				favoritaContato(agenda, scanner);
 				break;
 			case "R":
-
+				removeFavorito(agenda, scanner);
 				break;
 			case "S":
 				sai();
@@ -234,4 +234,11 @@ public class MainAgenda {
 			System.out.println("NENHUM FAVORITO");
 		}
 	}
+
+	private static void removeFavorito(Agenda agenda, Scanner scanner) {
+		System.out.print("\nPosicao> ");
+		int posicao = scanner.nextInt();
+		agenda.removeFav(posicao);
+	}
+
 }

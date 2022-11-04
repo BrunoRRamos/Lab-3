@@ -91,4 +91,8 @@ public class Agenda {
 		return listagemFav.toString();
 	}
 
+	public void removeFav(int posi) {
+		this.favoritos[posi].desfavoritaContato();
+		this.favoritos[posi] = null;
+	}
 }
