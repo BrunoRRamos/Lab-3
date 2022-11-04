@@ -22,7 +22,7 @@ public class Contato {
     }
 
     public String getContato() {
-        if (this.favorito == true) {
+        if (this.favorito) {
             return "❤ " + this.nome + " " + this.sobrenome + "\n" + this.telefone;
         }
         return this.nome + " " + this.sobrenome + "\n" + this.telefone;

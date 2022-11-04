@@ -95,4 +95,5 @@ public class Agenda {
 		this.favoritos[posi].desfavoritaContato();
 		this.favoritos[posi] = null;
 	}
+
 }
