@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * Interface com menus texto para manipular uma agenda de contatos.
- * 
+ *
  * @author BrunoRodriguesRamos
  *
  */
@@ -70,7 +70,7 @@ public class MainAgenda {
 				cadastraContato(agenda, scanner);
 				break;
 			case "L":
-				 listaContatos(agenda);
+				listaContatos(agenda);
 				break;
 			case "E":
 				exibeContato(agenda, scanner);
@@ -82,7 +82,7 @@ public class MainAgenda {
 				favoritaContato(agenda, scanner);
 				break;
 			case "R":
-
+				removeFavorito(agenda, scanner);
 				break;
 			case "S":
 				sai();
@@ -100,7 +100,7 @@ public class MainAgenda {
 		System.out.print(agenda.getListaContatos());
 	}
 
-	  /**
+	/**
 	 * Imprime os detalhes de um dos contatos da agenda.
 	 *
 	 * @param agenda  A agenda.
@@ -137,14 +137,15 @@ public class MainAgenda {
 	private static void cadastraContato(Agenda agenda, Scanner scanner) {
 		System.out.print("\nPosição na agenda> ");
 		int posicao = scanner.nextInt() - 1;
+		scanner.nextLine();
 		if (verificaPosicao(posicao)) {
 			System.out.println("POSIÇÃO INVÁLIDA");
 			return;
 		}
 
 		System.out.print("\nNome> ");
-		String nome = scanner.next();
-		scanner.nextLine();
+		String nome = scanner.nextLine();
+
 		System.out.print("\nSobrenome> ");
 		String sobrenome = scanner.nextLine();
 
@@ -161,7 +162,7 @@ public class MainAgenda {
 		System.out.print("\nTelefone> ");
 		String telefone = scanner.nextLine();
 
-		if (telefone == null) {
+		if (telefone.isBlank()) {
 			System.out.println("CONTATO INVALIDO");
 			return;
 		}
@@ -203,7 +204,7 @@ public class MainAgenda {
 	}
 
 	private static boolean isNullNome(String nome, String sobrenome) {
-		if (nome == null || sobrenome == null) {
+		if (nome.isBlank()) {
 			return true;
 		}
 		return false;
@@ -234,4 +235,11 @@ public class MainAgenda {
 			System.out.println("NENHUM FAVORITO");
 		}
 	}
+
+	private static void removeFavorito(Agenda agenda, Scanner scanner) {
+		System.out.print("\nPosicao> ");
+		int posicao = scanner.nextInt() - 1;
+		agenda.removeFav(posicao);
+	}
+
 }
