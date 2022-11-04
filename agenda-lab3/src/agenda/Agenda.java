@@ -23,26 +23,15 @@ public class Agenda {
 	}
 	
 	/**
-	 * Acessa a lista de contatos mantida.
+	 * Retorna o contato da posição especificada.
 	 *
 	 * @return O array de contatos.
 	 */
 
-	/**
-	public String[] getContatos() {
-		return this.contatos.clone();
-	}
-	 /*
-
-	/**
-	 * Acessa os dados de um contato específico.
-	 * @param posicao Posição do contato na agenda.
-	 * @return Dados do contato. Null se não há contato na posição.
-	 */
-	public String getContato(int posicao) {
-		String contatoInfo = contatos[posicao].getContato();
-		return contatoInfo;
-	}
+	 public String getContato(int posicao) {
+	 	String contatoInfo = contatos[posicao].getContato();
+	 		return contatoInfo;
+	 }
 
 	/**
 	 * Cadastra um contato em uma posição. Um cadastro em uma posição que já existe sobrescreve o anterior. 
@@ -55,11 +44,24 @@ public class Agenda {
 		this.contatos[posicao] = new Contato(nome, sobrenome, telefone);
 	}
 
+	/**
+	 * Cadastra um contato no array favoritos
+	 *
+	 * @param contatoPosi
+	 * @param favoritoPosi
+	 */
 	public void cadastraFavorito(int contatoPosi, int favoritoPosi) {
 		contatos[contatoPosi].favoritaContato();
 		favoritos[favoritoPosi] = contatos[contatoPosi];
 	}
 
+	/**
+	 * Verifica se o nome e sobrenome que estao sendo cadastrados já estão cadastrados em outro contato.
+	 *
+	 * @param nome
+	 * @param sobrenome
+	 * @return boolean
+	 */
 	public boolean verificaNomeContato(String nome, String sobrenome) {
 		for (int i = 0; i < contatos.length; i++) {
 			if (contatos[i] != null) {
@@ -71,6 +73,11 @@ public class Agenda {
 		return false;
 	}
 
+	/**
+	 * Retorna uma relação dos contatos cadastrados.
+	 *
+	 * @return
+	 */
 	public String getListaContatos() {
 		StringBuilder listagemNomes = new StringBuilder();
 		for (int i = 0; i < contatos.length; i++) {
@@ -81,6 +88,10 @@ public class Agenda {
 		return listagemNomes.toString();
 	}
 
+	/**
+	 * Retorna o nome e a posição dos contatos favoritos na lista rápida de acesso.
+	 * @return String contatosfavoritos
+	 */
 	public String getFavoritos() {
 		StringBuilder listagemFav = new StringBuilder();
 		for (int i = 0; i < favoritos.length; i++) {
@@ -91,9 +102,13 @@ public class Agenda {
 		return listagemFav.toString();
 	}
 
+	/**
+	 * Remove um contato favorito da lista rápida de acesso.
+	 *
+	 * @param posi
+	 */
 	public void removeFav(int posi) {
 		this.favoritos[posi].desfavoritaContato();
 		this.favoritos[posi] = null;
 	}
-
 }
