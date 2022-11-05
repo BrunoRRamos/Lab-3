@@ -29,8 +29,12 @@ public class Agenda {
 	 */
 
 	public String retornaContatoInfo(int posicao) {
-		String contatoInfo = contatos[posicao].toString();
-		return contatoInfo;
+		try {
+			String contatoInfo = contatos[posicao].toString();
+			return contatoInfo;
+		} catch (Exception e) {
+			return "POSIÇÃO INVÁLIDA!";
+		}
 	}
 
 	/**

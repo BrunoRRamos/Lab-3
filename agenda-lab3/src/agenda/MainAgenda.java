@@ -107,14 +107,10 @@ public class MainAgenda {
 	 * @param scanner Scanner para capturar qual contato.
 	 */
 	private static void exibeContato(Agenda agenda, Scanner scanner) {
-		try {
-			System.out.print("\nQual contato> ");
-			int posicao = scanner.nextInt() - 1;
-			String contato = agenda.retornaContatoInfo(posicao);
-			System.out.println("Dados do contato:\n" + contato);
-		} catch (NullPointerException e) {
-			System.out.println("POSIÇÃO INVÁLIDA!");
-		}
+		System.out.print("\nQual contato> ");
+		int posicao = scanner.nextInt() - 1;
+		String contato = agenda.retornaContatoInfo(posicao);
+		System.out.println("Dados do contato:\n" + contato);
 	}
 
 	/**
