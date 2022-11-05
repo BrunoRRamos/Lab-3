@@ -132,37 +132,21 @@ public class MainAgenda {
 	 */
 	private static void cadastraContato(Agenda agenda, Scanner scanner) {
 		System.out.print("\nPosição na agenda> ");
-		int posicao = scanner.nextInt() - 1;
+		int posicao = scanner.nextInt();
 		scanner.nextLine();
-		if (verificaPosicao(posicao)) {
-			System.out.println("POSIÇÃO INVÁLIDA");
-			return;
-		}
-
 		System.out.print("\nNome> ");
 		String nome = scanner.nextLine();
-
 		System.out.print("\nSobrenome> ");
 		String sobrenome = scanner.nextLine();
-
-		if (isNullNome(nome, sobrenome)) {
-			System.out.println("CONTATO INVALIDO");
-			return;
-		}
-
-		if (agenda.verificaNomeContato(nome, sobrenome)) {
-			System.out.println("CONTATO JA CADASTRADO");
-			return;
-		}
-
 		System.out.print("\nTelefone> ");
 		String telefone = scanner.nextLine();
 
-		if (telefone.isBlank()) {
-			System.out.println("CONTATO INVALIDO");
-			return;
+		try {
+			agenda.cadastraContato(posicao, nome, sobrenome, telefone);
+			System.out.println("CADASTRO REALIZADO");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		agenda.cadastraContato(posicao, nome, sobrenome, telefone);
 	}
 
 	/**
@@ -199,12 +183,6 @@ public class MainAgenda {
 		return menorQueZero || maiorQue10;
 	}
 
-	private static boolean isNullNome(String nome, String sobrenome) {
-		if (nome.isBlank()) {
-			return true;
-		}
-		return false;
-	}
 
 	private static void favoritaContato(Agenda agenda, Scanner scanner) {
 		try {

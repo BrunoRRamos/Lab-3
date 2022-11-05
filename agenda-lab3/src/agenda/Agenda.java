@@ -30,7 +30,7 @@ public class Agenda {
 
 	public String retornaContatoInfo(int posicao) {
 		try {
-			String contatoInfo = contatos[posicao].toString();
+			String contatoInfo = contatos[posicao - 1].toString();
 			return contatoInfo;
 		} catch (Exception e) {
 			return "POSIÇÃO INVÁLIDA!";
@@ -45,7 +45,23 @@ public class Agenda {
 	 * @param telefone Telefone do contato.
 	 */
 	public void cadastraContato(int posicao, String nome, String sobrenome, String telefone) {
-		this.contatos[posicao] = new Contato(nome, sobrenome, telefone);
+		if (posicao > 100 || posicao < 0) {
+			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
+		}
+
+		if (nome.isBlank()) {
+			throw new IllegalArgumentException("CONTATO INVALIDO");
+		}
+
+		if (telefone.isBlank()) {
+			throw new IllegalArgumentException("NUMERO INVALIDO");
+		}
+
+		if (verificaNomeContato(nome, sobrenome)) {
+			throw new IllegalArgumentException("CONTATO JA CADASTRADO");
+		}
+
+		this.contatos[posicao - 1] = new Contato(nome, sobrenome, telefone);
 	}
 
 	/**
@@ -66,7 +82,7 @@ public class Agenda {
 	 * @param sobrenome
 	 * @return boolean
 	 */
-	public boolean verificaNomeContato(String nome, String sobrenome) {
+	private boolean verificaNomeContato(String nome, String sobrenome) {
 		for (int i = 0; i < contatos.length; i++) {
 			if (contatos[i] != null) {
 				if (contatos[i].getNome().equals(nome) && contatos[i].getSobrenome().equals(sobrenome)){

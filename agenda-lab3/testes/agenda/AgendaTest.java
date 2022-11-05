@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AgendaTest {
 
     private Agenda agenda = new Agenda();
+    private Throwable exception;
 
     @BeforeEach
     void preparaContatos() {
@@ -25,14 +26,48 @@ class AgendaTest {
     }
 
     @Test
-    void cadastraContato() {
+    void cadastraContatoTest() {
         String msg = "Cadastra um contato";
         agenda.cadastraContato(3, "Pedro", "Maia", "(32) 3332-3254");
+        agenda.cadastraContato(100, "Jonas", "Huts", "(34) 4039-8654");
+        agenda.cadastraContato(1, "Júlio", "Marques", "3344-5567");
         assertEquals("Pedro Maia\n(32) 3332-3254", agenda.retornaContatoInfo(3));
+        assertEquals("Jonas Huts\n(34) 4039-8654", agenda.retornaContatoInfo(100));
+        assertEquals("Júlio Marques\n3344-5567", agenda.retornaContatoInfo(1));
     }
 
     @Test
-    void cadastraFavorito() {
+    void cadastraContatoTestExeptions() {
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraContato(-12, "Selma", "", "2244-5543");
+        });
+        assertEquals("POSIÇÃO INVALIDA", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraContato(101, "Selma", "", "2244-5543");
+        });
+        assertEquals("POSIÇÃO INVALIDA", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraContato(3, "Pedro", "Maia", "(32) 3332-3254");
+            agenda.cadastraContato(4, "Pedro", "Maia", "(32) 3332-3254");
+        });
+        assertEquals("CONTATO JA CADASTRADO", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraContato(5, "", "Pereira", "(32) 4345-4456");
+        });
+        assertEquals("CONTATO INVALIDO", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraContato(5, "Joana", "Pereira", "");
+        });
+        assertEquals("NUMERO INVALIDO", exception.getMessage());
+    }
+
+    @Test
+    void cadastraFavoritoTest() {
+
     }
 
     @Test
