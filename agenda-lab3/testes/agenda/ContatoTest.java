@@ -15,6 +15,12 @@ class ContatoTest {
     }
 
     @Test
+    void nomeCompletoTest() {
+        String msg = "Esperando obter o nome completo";
+        assertEquals("Matheus Gaudencio", this.contatoBase.nomeCompleto());
+    }
+
+    @Test
     void favoritaContatoTest() {
         contatoBase.favoritaContato();
         assertTrue(contatoBase.getFavorito());
@@ -39,5 +45,4 @@ class ContatoTest {
         String infos = contatoBase.toString();
         assertEquals("❤ Matheus Gaudencio\n555-5551", this.contatoBase.toString());
     }
-
 }

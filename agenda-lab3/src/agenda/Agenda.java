@@ -28,7 +28,7 @@ public class Agenda {
 	 * @return O array de contatos.
 	 */
 
-	public String getContato(int posicao) {
+	public String retornaContatoInfo(int posicao) {
 		String contatoInfo = contatos[posicao].toString();
 		return contatoInfo;
 	}

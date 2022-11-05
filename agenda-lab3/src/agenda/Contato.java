@@ -1,7 +1,7 @@
 package agenda;
 
 /**
- * Classe que representa um contato e seus comportamentos
+ * Classe que representa um contato e seus comportamentos.
  *
  * @author Bruno Rodrigues Ramos
  */
@@ -12,7 +12,7 @@ public class Contato {
     private boolean favorito;
 
     /**
-     * Construtor que inicia um contato
+     * Construtor que inicia um contato.
      *
      * @param nome
      * @param sobrenome
@@ -40,7 +40,7 @@ public class Contato {
     }
 
     /**
-     * Método getter que retorna nome, sobrenome, telefone
+     * Método getter que retorna nome, sobrenome, telefone.
      * @return String(nome, sobrenome, telefone)
      */
     @Override
@@ -52,7 +52,7 @@ public class Contato {
     }
 
     /**
-     * Método getter que retorna o nome do contato
+     * Método getter que retorna o nome do contato.
      * @return nome
      */
     public String getNome() {
@@ -60,7 +60,7 @@ public class Contato {
     }
 
     /**
-     * Método getter que retorna o sobrenome do contato
+     * Método getter que retorna o sobrenome do contato.
      * @return sobrenome
      */
     public String getSobrenome() {
@@ -68,9 +68,16 @@ public class Contato {
     }
 
     /**
-     * Método getter para o atributo favorito
+     * Método getter para o atributo favorito.
      */
     public boolean getFavorito() {
         return this.favorito;
+    }
+
+    /**
+     *  Método retorna nome completo.
+     */
+    public String nomeCompleto() {
+        return this.nome + " " + this.sobrenome;
     }
 }

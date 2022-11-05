@@ -110,7 +110,7 @@ public class MainAgenda {
 		try {
 			System.out.print("\nQual contato> ");
 			int posicao = scanner.nextInt() - 1;
-			String contato = agenda.getContato(posicao);
+			String contato = agenda.retornaContatoInfo(posicao);
 			System.out.println("Dados do contato:\n" + contato);
 		} catch (NullPointerException e) {
 			System.out.println("POSIÇÃO INVÁLIDA!");
