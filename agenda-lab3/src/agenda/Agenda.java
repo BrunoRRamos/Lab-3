@@ -29,7 +29,7 @@ public class Agenda {
 	 */
 
 	public String getContato(int posicao) {
-		String contatoInfo = contatos[posicao].getContato();
+		String contatoInfo = contatos[posicao].toString();
 		return contatoInfo;
 	}
 
@@ -93,7 +93,7 @@ public class Agenda {
 	 * @return String contatosfavoritos
 	 */
 	public String getFavoritos() {
-		StringBuilder listagemFav = new StringBuilder();
+	StringBuilder listagemFav = new StringBuilder();
 		for (int i = 0; i < favoritos.length; i++) {
 			if (contatos[i] != null) {
 				listagemFav.append(String.format("%s - %s\n", i + 1, favoritos[i].getNome()));

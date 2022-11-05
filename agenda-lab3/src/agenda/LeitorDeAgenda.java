@@ -61,5 +61,4 @@ public class LeitorDeAgenda {
 
 		agenda.cadastraContato(posicao, nome, sobrenome, telefone);
 	}
-
 }

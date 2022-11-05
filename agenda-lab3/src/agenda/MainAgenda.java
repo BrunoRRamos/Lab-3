@@ -241,5 +241,4 @@ public class MainAgenda {
 		int posicao = scanner.nextInt() - 1;
 		agenda.removeFav(posicao);
 	}
-
 }

@@ -43,7 +43,8 @@ public class Contato {
      * Método getter que retorna nome, sobrenome, telefone
      * @return String(nome, sobrenome, telefone)
      */
-    public String getContato() {
+    @Override
+    public String toString() {
         if (this.favorito) {
             return "❤ " + this.nome + " " + this.sobrenome + "\n" + this.telefone;
         }
@@ -64,5 +65,12 @@ public class Contato {
      */
     public String getSobrenome() {
         return sobrenome;
+    }
+
+    /**
+     * Método getter para o atributo favorito
+     */
+    public boolean getFavorito() {
+        return this.favorito;
     }
 }
