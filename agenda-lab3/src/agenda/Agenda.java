@@ -49,6 +49,10 @@ public class Agenda {
 			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
 		}
 
+		if (posicao == 0) {
+			throw new IndexOutOfBoundsException("POSIÇÃO INVALIDA");
+		}
+
 		if (nome.isBlank()) {
 			throw new IllegalArgumentException("CONTATO INVALIDO");
 		}

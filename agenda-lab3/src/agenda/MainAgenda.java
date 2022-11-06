@@ -107,7 +107,7 @@ public class MainAgenda {
 	 */
 	private static void exibeContato(Agenda agenda, Scanner scanner) {
 		System.out.print("\nQual contato> ");
-		int posicao = scanner.nextInt() - 1;
+		int posicao = scanner.nextInt();
 		String contato = agenda.retornaContatoInfo(posicao);
 		System.out.println("Dados do contato:\n" + contato);
 	}

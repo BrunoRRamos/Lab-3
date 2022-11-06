@@ -18,27 +18,38 @@ class AgendaTest {
     }
     @Test
     void retornaContatoInfoTest() {
-        String msg = "Retorna nome, sobrenome e número";
+        agenda.cadastraContato(100, "Mike", "Souza", "3344-2020");
+        assertEquals("Mike Souza\n3344-2020", agenda.retornaContatoInfo(100));
         assertEquals("Matheus Gaudencio\n555-5551", agenda.retornaContatoInfo(1));
         assertEquals("Bruno Rodrigues\n(83) 2233-4432", agenda.retornaContatoInfo(2));
         assertEquals("POSIÇÃO INVÁLIDA!", agenda.retornaContatoInfo(43));
         assertEquals("POSIÇÃO INVÁLIDA!", agenda.retornaContatoInfo(-23));
         assertEquals("POSIÇÃO INVÁLIDA!", agenda.retornaContatoInfo(101));
+        assertEquals("POSIÇÃO INVÁLIDA!", agenda.retornaContatoInfo(0));
+        agenda.cadastraFavorito(100, 1);
+        assertEquals("❤ Mike Souza\n3344-2020", agenda.retornaContatoInfo(100));
     }
 
     @Test
     void cadastraContatoTest() {
-        String msg = "Cadastra um contato";
         agenda.cadastraContato(3, "Pedro", "Maia", "(32) 3332-3254");
         agenda.cadastraContato(100, "Jonas", "Huts", "(34) 4039-8654");
         agenda.cadastraContato(1, "Júlio", "Marques", "3344-5567");
         assertEquals("Pedro Maia\n(32) 3332-3254", agenda.retornaContatoInfo(3));
         assertEquals("Jonas Huts\n(34) 4039-8654", agenda.retornaContatoInfo(100));
         assertEquals("Júlio Marques\n3344-5567", agenda.retornaContatoInfo(1));
+
+        agenda.cadastraContato(3, "Maria", "Silva", "3344-6754");
+        assertEquals("Maria Silva\n3344-6754", agenda.retornaContatoInfo(3));
     }
 
     @Test
     void cadastraContatoTestExceptions() {
+        exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+            agenda.cadastraContato(0, "Selma", "", "2244-5543");
+        });
+        assertEquals("POSIÇÃO INVALIDA", exception.getMessage());
+
         exception = assertThrows(IllegalArgumentException.class, () -> {
             agenda.cadastraContato(-12, "Selma", "", "2244-5543");
         });
