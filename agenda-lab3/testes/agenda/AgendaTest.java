@@ -14,6 +14,7 @@ class AgendaTest {
     void preparaContatos() {
         agenda.cadastraContato(1, "Matheus", "Gaudencio", "555-5551");
         agenda.cadastraContato(2, "Bruno", "Rodrigues", "(83) 2233-4432");
+        agenda.cadastraContato(10, "David", "Nóbrega", "1010-2020");
     }
     @Test
     void retornaContatoInfoTest() {
@@ -37,7 +38,7 @@ class AgendaTest {
     }
 
     @Test
-    void cadastraContatoTestExeptions() {
+    void cadastraContatoTestExceptions() {
         exception = assertThrows(IllegalArgumentException.class, () -> {
             agenda.cadastraContato(-12, "Selma", "", "2244-5543");
         });
@@ -72,18 +73,49 @@ class AgendaTest {
     }
 
     @Test
-    void verificaNomeContato() {
+    void cadastraFavoritosTestExceptions() {
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraFavorito(2, 1);
+            agenda.cadastraFavorito(2, 1);
+        });
+        assertEquals("JA FOI FAVORITADO", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraFavorito(45, 2);
+        });
+        assertEquals("POSIÇÃO INVALIDA", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraFavorito(1, -23);
+        });
+        assertEquals("POSIÇÃO INVALIDA", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.cadastraFavorito(1, 11);
+        });
+        assertEquals("POSIÇÃO INVALIDA", exception.getMessage());
     }
 
     @Test
-    void getListaContatos() {
+    void returnListaContatosTest() {
+        assertEquals("1 - Matheus Gaudencio\n2 - Bruno Rodrigues\n10 - David Nóbrega\n", agenda.returnListaContatos());
     }
 
     @Test
-    void getFavoritos() {
+    void returnFavoritosTest() {
+        assertEquals("NENHUM FAVORITO", agenda.returnFavoritos());
+        agenda.cadastraFavorito(1, 1);
+        agenda.cadastraFavorito(2, 2);
+        agenda.cadastraFavorito(10, 3);
+        assertEquals("1 - Matheus Gaudencio\n2 - Bruno Rodrigues\n3 - David Nóbrega\n", agenda.returnFavoritos());
     }
 
     @Test
     void removeFav() {
+        agenda.cadastraFavorito(2, 1);
+        assertEquals("❤ Bruno Rodrigues\n(83) 2233-4432", agenda.retornaContatoInfo(2));
+        agenda.removeFav(1);
+        assertEquals("Bruno Rodrigues\n(83) 2233-4432", agenda.retornaContatoInfo(2));
+
     }
 }

@@ -79,8 +79,16 @@ public class Agenda {
 			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
 		}
 
+		if (contatos[contatoPosi - 1] == null) {
+			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
+		}
+
+		if (contatos[contatoPosi - 1].getFavorito()) {
+			throw new IllegalArgumentException("JA FOI FAVORITADO");
+		}
+
 		contatos[contatoPosi - 1].favoritaContato();
-		favoritos[favoritoPosi - 1] = contatos[contatoPosi];
+		favoritos[favoritoPosi - 1] = contatos[contatoPosi - 1];
 	}
 
 	/**
@@ -106,11 +114,11 @@ public class Agenda {
 	 *
 	 * @return
 	 */
-	public String getListaContatos() {
+	public String returnListaContatos() {
 		StringBuilder listagemNomes = new StringBuilder();
 		for (int i = 0; i < contatos.length; i++) {
 			if (contatos[i] != null) {
-				listagemNomes.append(String.format("%s - %s\n", i + 1, contatos[i].getNome()));
+				listagemNomes.append(String.format("%s - %s\n", i + 1, contatos[i].nomeCompleto()));
 			}
 		}
 		return listagemNomes.toString();
@@ -120,12 +128,15 @@ public class Agenda {
 	 * Retorna o nome e a posição dos contatos favoritos na lista rápida de acesso.
 	 * @return String contatosfavoritos
 	 */
-	public String getFavoritos() {
+	public String returnFavoritos() {
 	StringBuilder listagemFav = new StringBuilder();
 		for (int i = 0; i < favoritos.length; i++) {
-			if (contatos[i] != null) {
-				listagemFav.append(String.format("%s - %s\n", i + 1, favoritos[i].getNome()));
+			if (favoritos[i] != null) {
+				listagemFav.append(String.format("%s - %s\n", i + 1, this.favoritos[i].nomeCompleto()));
 			}
+		}
+		if (listagemFav.isEmpty()) {
+			return "NENHUM FAVORITO";
 		}
 		return listagemFav.toString();
 	}
@@ -136,7 +147,15 @@ public class Agenda {
 	 * @param posi
 	 */
 	public void removeFav(int posi) {
-		this.favoritos[posi].desfavoritaContato();
-		this.favoritos[posi] = null;
+		if (posi > 10 || posi < 0) {
+			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
+		}
+
+		if (contatos[posi - 1] == null) {
+			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
+		}
+
+		this.favoritos[posi - 1].desfavoritaContato();
+		this.favoritos[posi - 1] = null;
 	}
 }

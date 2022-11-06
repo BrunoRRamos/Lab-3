@@ -33,7 +33,6 @@ public class MainAgenda {
 			escolha = menu(scanner);
 			comando(escolha, agenda, scanner);
 		}
-
 	}
 
 	/**
@@ -97,7 +96,7 @@ public class MainAgenda {
 	 */
 	private static void listaContatos(Agenda agenda) {
 		System.out.println("\nLista de contatos: ");
-		System.out.print(agenda.getListaContatos());
+		System.out.print(agenda.returnListaContatos());
 	}
 
 	/**
@@ -171,19 +170,6 @@ public class MainAgenda {
 		System.out.println("Carregamos " + carregados + " registros.");
 	}
 
-	private static boolean verificaPosicao(int posicao) {
-		boolean maiorQue100 = posicao > 100;
-		boolean menorQueZero = posicao < 0;
-		return menorQueZero || maiorQue100;
-	}
-
-	private static boolean verificaPosicaoFav(int posicao) {
-		boolean maiorQue10 = posicao > 10;
-		boolean menorQueZero = posicao < 0;
-		return menorQueZero || maiorQue10;
-	}
-
-
 	private static void favoritaContato(Agenda agenda, Scanner scanner) {
 		try {
 			System.out.print("\nContato> ");
@@ -197,16 +183,16 @@ public class MainAgenda {
 	}
 
 	private static void listaFavoritos(Agenda agenda) {
-		try {
-			System.out.print(agenda.getFavoritos());
-		}catch (NullPointerException e) {
-			System.out.println("NENHUM FAVORITO");
-		}
+		System.out.print(agenda.returnFavoritos());
 	}
 
 	private static void removeFavorito(Agenda agenda, Scanner scanner) {
-		System.out.print("\nPosicao> ");
-		int posicao = scanner.nextInt() - 1;
-		agenda.removeFav(posicao);
+		try {
+			System.out.print("\nPosicao> ");
+			int posicao = scanner.nextInt();
+			agenda.removeFav(posicao);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
