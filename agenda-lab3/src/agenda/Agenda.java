@@ -71,8 +71,16 @@ public class Agenda {
 	 * @param favoritoPosi
 	 */
 	public void cadastraFavorito(int contatoPosi, int favoritoPosi) {
-		contatos[contatoPosi].favoritaContato();
-		favoritos[favoritoPosi] = contatos[contatoPosi];
+		if (contatoPosi > 100 || contatoPosi < 0) {
+			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
+		}
+
+		if (favoritoPosi > 10 || favoritoPosi < 0) {
+			throw new IllegalArgumentException("POSIÇÃO INVALIDA");
+		}
+
+		contatos[contatoPosi - 1].favoritaContato();
+		favoritos[favoritoPosi - 1] = contatos[contatoPosi];
 	}
 
 	/**

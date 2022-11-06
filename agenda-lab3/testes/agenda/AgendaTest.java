@@ -67,7 +67,8 @@ class AgendaTest {
 
     @Test
     void cadastraFavoritoTest() {
-
+        agenda.cadastraFavorito(2, 1);
+        assertEquals("❤ Bruno Rodrigues\n(83) 2233-4432", agenda.retornaContatoInfo(2));
     }
 
     @Test

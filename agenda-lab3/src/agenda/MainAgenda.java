@@ -187,18 +187,12 @@ public class MainAgenda {
 	private static void favoritaContato(Agenda agenda, Scanner scanner) {
 		try {
 			System.out.print("\nContato> ");
-			int contatoPosi = scanner.nextInt() - 1;
+			int contatoPosi = scanner.nextInt();
 			System.out.print("\nPosicao> ");
-			int favoritoPosi = scanner.nextInt() - 1;
-
-			if (verificaPosicao(contatoPosi) || verificaPosicaoFav(favoritoPosi)) {
-				System.out.println("POSICAO INVALIDA");
-				return;
-			}
+			int favoritoPosi = scanner.nextInt();
 			agenda.cadastraFavorito(contatoPosi, favoritoPosi);
-			System.out.println("CONTATO FAVORITADO NA POSIÇÃO " + (contatoPosi + 1) + "!");
-		} catch (NullPointerException e) {
-			System.out.println("POSICAO INVALIDA");
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
